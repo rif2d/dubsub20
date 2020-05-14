@@ -9,12 +9,14 @@ class ShapeNodeComponent: GKComponent {
         super.init()
     }
 
-    convenience init(points: [CGPoint]) {
+    convenience init(points: [CGPoint], color: UIColor) {
         let path = CGMutablePath()
         path.addLines(between: points)
         path.closeSubpath()
         
         let node = SKShapeNode(path: path, centered: true)
+        node.fillColor = color
+        node.lineWidth = 0
 
         self.init(node: node)
     }

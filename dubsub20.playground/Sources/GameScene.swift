@@ -15,10 +15,7 @@ class GameScene: SKScene {
             CGPoint(x: 50, y: 0),
             CGPoint(x: 50, y: 50),
             CGPoint(x: 0, y: 50),
-        ])
-        
-        square.node.fillColor = .red
-        square.node.lineWidth = 0
+        ], color: .red)
         
         toolbox.addChild(square.node)
     }
