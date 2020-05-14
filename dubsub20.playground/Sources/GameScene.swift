@@ -10,7 +10,7 @@ class GameScene: SKScene {
     }
     
     func setToolbox(){
-        let square = Shape(points: [
+        let square = ToolboxShape(points: [
             CGPoint(x: 0, y: 0),
             CGPoint(x: 50, y: 0),
             CGPoint(x: 50, y: 50),
