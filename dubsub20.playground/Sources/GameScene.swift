@@ -1,16 +1,15 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    var toolbox: SKSpriteNode!
+    var canvas: SKSpriteNode!
     
-    private var label : SKLabelNode!
+    func setContainer(){
+        toolbox = childNode(withName: "toolbox") as? SKSpriteNode
+        canvas = childNode(withName: "canvas") as? SKSpriteNode
+    }
     
     override func didMove(to view: SKView) {
-        // Get label node from scene and store it for use later
-        label = childNode(withName: "//helloLabel") as? SKLabelNode
-        label.alpha = 0.0
-        let fadeInOut = SKAction.sequence([.fadeIn(withDuration: 2.0),
-                                           .fadeOut(withDuration: 2.0)])
-        label.run(.repeatForever(fadeInOut))
-        
+        setContainer()
     }
 }
