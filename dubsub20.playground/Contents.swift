@@ -1,3 +1,10 @@
 import PlaygroundSupport
+import UIKit
 
-PlaygroundPage.current.liveView = GameViewController()
+let gameVC = GameViewController()
+gameVC.preferredContentSize = CGSize(
+    width: 640,
+    height: 480
+)
+
+PlaygroundPage.current.liveView = gameVC
