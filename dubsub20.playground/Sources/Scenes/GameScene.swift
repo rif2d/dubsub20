@@ -1,6 +1,7 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    var shapeManager: ShapeManager!
     var toolbox: SKSpriteNode!
     var canvas: SKSpriteNode!
     var pannedComponent: PanGestureComponent?
@@ -18,17 +19,13 @@ class GameScene: SKScene {
             CGPoint(x: 50, y: 0),
             CGPoint(x: 50, y: 50),
             CGPoint(x: 0, y: 50),
-        ], color: .red)
+        ], color: .red, parent: toolbox)
         
-        let square1 = CanvasShape(points: [
-            CGPoint(x: 0, y: 0),
-            CGPoint(x: 50, y: 0),
-            CGPoint(x: 50, y: 50),
-            CGPoint(x: 0, y: 50),
-        ], color: .red)
-        
-        toolbox.addChild(square.node)
-        canvas.addChild(square1.node)
+        shapeManager.insert(square)
+    }
+    
+    override func sceneDidLoad() {
+        shapeManager = ShapeManager(scene: self)
     }
     
     override func didMove(to view: SKView) {
