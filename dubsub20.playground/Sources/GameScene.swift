@@ -3,6 +3,8 @@ import SpriteKit
 class GameScene: SKScene {
     var toolbox: SKSpriteNode!
     var canvas: SKSpriteNode!
+    var pannedComponent: PanGestureComponent?
+    var gestureState: UIGestureRecognizer.State = .possible
     
     func setContainer(){
         toolbox = childNode(withName: "toolbox") as? SKSpriteNode
