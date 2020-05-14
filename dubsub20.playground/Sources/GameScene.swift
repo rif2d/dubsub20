@@ -4,6 +4,7 @@ class GameScene: SKScene {
     var toolbox: SKSpriteNode!
     var canvas: SKSpriteNode!
     var pannedComponent: PanGestureComponent?
+    var rotatedComponent: RotationGestureComponent?
     var gestureState: UIGestureRecognizer.State = .possible
     
     func setContainer(){

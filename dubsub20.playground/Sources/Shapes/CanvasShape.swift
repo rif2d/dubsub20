@@ -7,6 +7,10 @@ class CanvasShape: Shape {
         let panGesture = PanGestureComponent()
         panGesture.handler = panHandler
         addComponent(panGesture)
+        
+        let rotationGesture = RotationGestureComponent()
+        rotationGesture.handler = rotationHandler
+        addComponent(rotationGesture)
     }
     
     func panHandler(gesture: UIPanGestureRecognizer){
@@ -18,8 +22,22 @@ class CanvasShape: Shape {
         }
     }
     
+    func rotationHandler(gesture: UIRotationGestureRecognizer){
+        guard let rotation = rotationComponent.rotation else { return }
+        
+        node.zRotation = -rotation
+    }
+    
     var panComponent: PanGestureComponent {
         guard let ref = component(ofType: PanGestureComponent.self) else {
+            fatalError()
+        }
+
+        return ref
+    }
+    
+    var rotationComponent: RotationGestureComponent {
+        guard let ref = component(ofType: RotationGestureComponent.self) else {
             fatalError()
         }
 
