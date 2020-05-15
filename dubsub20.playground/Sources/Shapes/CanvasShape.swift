@@ -1,7 +1,7 @@
 import GameplayKit
 
 class CanvasShape: Shape {
-    override init(points: [CGPoint], color: UIColor) {
+    init(points: [CGPoint], color: UIColor, parent: SKNode) {
         super.init(points: points, color: color)
         
         let panGesture = PanGestureComponent()
@@ -11,6 +11,9 @@ class CanvasShape: Shape {
         let rotationGesture = RotationGestureComponent()
         rotationGesture.handler = rotationHandler
         addComponent(rotationGesture)
+        
+        let render = RenderComponent(node: node, parent: parent)
+        addComponent(render)
     }
     
     func panHandler(gesture: UIPanGestureRecognizer){
@@ -18,7 +21,7 @@ class CanvasShape: Shape {
         
         if let parent = node.parent, let scene = node.scene {
             let relativePanPosition = scene.convert(panPosition, to: parent)
-            position?.setPosition(relativePanPosition, duration: 0.01)
+            position?.setPosition(relativePanPosition)
         }
     }
     

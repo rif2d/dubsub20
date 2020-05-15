@@ -1,18 +1,26 @@
 import GameplayKit
 
 class ToolboxShapeFactory {
-    var toolbox: SKNode
     var colors: [UIColor] = [.systemPink, .systemBlue, .systemGreen, .systemYellow, .white]
+    var scene: GameScene
     
-    init(toolbox: SKNode) {
-        self.toolbox = toolbox
+    init(scene: GameScene) {
+        self.scene = scene
     }
     
     func make(triangle: Triangle, color: UIColor, size: Int) -> ToolboxShape {
-        return ToolboxShape(points: triangle.points(size), color: color, parent: toolbox)
+        let points = triangle.points(size)
+        let toolboxShape = ToolboxShape(points: points, color: color, parent: scene.toolbox)
+        
+        toolboxShape.handler = {
+            let canvasShape = CanvasShape(points: points, color: color, parent: self.scene.canvas)
+            self.scene.shapeManager.insert(canvasShape)
+        }
+        
+        return toolboxShape
     }
     
-    func generate(manager: ShapeManager, size: Int){
+    func generate(size: Int){
         var block1 = 0
         for (n, color) in colors.enumerated() {
             let shape = make(triangle: .isosceles, color: color, size: size)
@@ -24,7 +32,7 @@ class ToolboxShapeFactory {
             
             shape.position?.setPosition(position)
             
-            manager.insert(shape)
+            scene.shapeManager.insert(shape)
         }
         
         for (n, color) in colors.enumerated() {
@@ -36,7 +44,7 @@ class ToolboxShapeFactory {
             
             shape.position?.setPosition(position)
             
-            manager.insert(shape)
+            scene.shapeManager.insert(shape)
         }
     }
 }

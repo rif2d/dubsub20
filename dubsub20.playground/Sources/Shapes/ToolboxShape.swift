@@ -1,6 +1,9 @@
 import GameplayKit
 
 class ToolboxShape: Shape {
+    var points: [CGPoint]!
+    var color: UIColor!
+    
     var handler: () -> () = {} {
         didSet {
             component(ofType: TapGestureComponent.self)?.handler = handler
