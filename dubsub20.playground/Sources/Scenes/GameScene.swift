@@ -15,7 +15,7 @@ public class GameScene: SKScene {
     
     func setToolbox(){
         let toolboxFactory = ToolboxShapeFactory(toolbox: toolbox)
-        toolboxFactory.generate(manager: shapeManager)
+        toolboxFactory.generate(manager: shapeManager, size: 50)
     }
     
     override public func sceneDidLoad() {

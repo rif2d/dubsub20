@@ -1,26 +1,22 @@
 import GameplayKit
 
-enum Size: Int {
-    case medium = 40
-    case large = 50
-}
-
-enum Shaper {
-    case square(Size)
-    case triangle(Size)
+enum Triangle: CaseIterable {
+    case isosceles
+    case right
     
-    func points() -> [CGPoint] {
+    func points(_ size: Int) -> [CGPoint] {
         switch self {
-        case .square(let size):
+        case .isosceles:
             return [
                 CGPoint(x: 0, y: 0),
-                CGPoint(x: size.rawValue, y: 0),
-                CGPoint(x: size.rawValue, y: size.rawValue),
-                CGPoint(x: 0, y: size.rawValue),
+                CGPoint(x: size, y: 0),
+                CGPoint(x: size/2, y: size),
             ]
-        case .triangle(_):
+        case .right:
             return [
-                CGPoint(x: 0, y: 0)
+                CGPoint(x: 0, y: 0),
+                CGPoint(x: size, y: 0),
+                CGPoint(x: 0, y: size),
             ]
         }
     }
@@ -34,19 +30,31 @@ class ToolboxShapeFactory {
         self.toolbox = toolbox
     }
     
-    func make(shape: Shaper, color: UIColor) -> ToolboxShape {
-        return ToolboxShape(points: shape.points(), color: color, parent: toolbox)
+    func make(triangle: Triangle, color: UIColor, size: Int) -> ToolboxShape {
+        return ToolboxShape(points: triangle.points(size), color: color, parent: toolbox)
     }
     
-    func generate(manager: ShapeManager){
+    func generate(manager: ShapeManager, size: Int){
+        
+        var block1 = 0
         for (n, color) in colors.enumerated() {
-            let shape = make(shape: .square(.medium), color: color)
+            let shape = make(triangle: .isosceles, color: color, size: size)
             
-            let blockSize = Size.medium.rawValue
-            let margin = 20
+            let xPosition = size + 2 * (n * size)
+            let yPosition = -size
+            let position = CGPoint(x: xPosition, y: yPosition)
+            block1 = xPosition
             
-            let xPosition = blockSize + (n * blockSize) + ( n * margin)
-            let yPosition = -blockSize
+            shape.position?.setPosition(position)
+            
+            manager.insert(shape)
+        }
+        
+        for (n, color) in colors.enumerated() {
+            let shape = make(triangle: .right, color: color, size: size)
+            
+            let xPosition = block1 + 2 * size + 2 * (n * size)
+            let yPosition = -size
             let position = CGPoint(x: xPosition, y: yPosition)
             
             shape.position?.setPosition(position)

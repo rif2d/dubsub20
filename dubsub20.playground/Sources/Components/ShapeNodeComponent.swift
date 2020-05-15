@@ -16,7 +16,9 @@ class ShapeNodeComponent: GKComponent {
         
         let node = SKShapeNode(path: path, centered: true)
         node.fillColor = color
-        node.lineWidth = 0
+        node.strokeColor = color
+        node.lineWidth = 2
+        node.isAntialiased = true
 
         self.init(node: node)
     }
