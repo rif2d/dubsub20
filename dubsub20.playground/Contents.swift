@@ -4,8 +4,8 @@ import SpriteKit
 let sceneView = SKView(frame: CGRect(
     x:0,
     y:0,
-    width: 640,
-    height: 480
+    width: 720,
+    height: 540
 ))
 
 if let scene = GameScene(fileNamed: "GameScene") {
