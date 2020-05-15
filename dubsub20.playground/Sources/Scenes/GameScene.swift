@@ -14,12 +14,8 @@ class GameScene: SKScene {
     }
     
     func setToolbox(){
-        let square = ToolboxShape(points: [
-            CGPoint(x: 0, y: 0),
-            CGPoint(x: 50, y: 0),
-            CGPoint(x: 50, y: 50),
-            CGPoint(x: 0, y: 50),
-        ], color: .red, parent: toolbox)
+        let toolboxFactory = ToolboxShapeFactory(toolbox: toolbox)
+        let square = toolboxFactory.make(shape: .square(.medium), color: .red)
         
         shapeManager.insert(square)
     }
