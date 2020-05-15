@@ -1,6 +1,6 @@
 import SpriteKit
 
-class GameScene: SKScene {
+public class GameScene: SKScene {
     var shapeManager: ShapeManager!
     var toolbox: SKSpriteNode!
     var canvas: SKSpriteNode!
@@ -15,16 +15,14 @@ class GameScene: SKScene {
     
     func setToolbox(){
         let toolboxFactory = ToolboxShapeFactory(toolbox: toolbox)
-        let square = toolboxFactory.make(shape: .square(.medium), color: .red)
-        
-        shapeManager.insert(square)
+        toolboxFactory.generate(manager: shapeManager)
     }
     
-    override func sceneDidLoad() {
+    override public func sceneDidLoad() {
         shapeManager = ShapeManager(scene: self)
     }
     
-    override func didMove(to view: SKView) {
+    override public func didMove(to view: SKView) {
         setGesture()
         setContainer()
         setToolbox()

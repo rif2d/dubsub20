@@ -1,9 +1,8 @@
 import GameplayKit
 
-enum Size: CGFloat {
-    case small = 10
-    case medium = 20
-    case large = 30
+enum Size: Int {
+    case medium = 40
+    case large = 50
 }
 
 enum Shaper {
@@ -29,6 +28,7 @@ enum Shaper {
 
 class ToolboxShapeFactory {
     var toolbox: SKNode
+    var colors: [UIColor] = [.systemPink, .systemBlue, .systemGreen, .systemYellow]
     
     init(toolbox: SKNode) {
         self.toolbox = toolbox
@@ -36,5 +36,22 @@ class ToolboxShapeFactory {
     
     func make(shape: Shaper, color: UIColor) -> ToolboxShape {
         return ToolboxShape(points: shape.points(), color: color, parent: toolbox)
+    }
+    
+    func generate(manager: ShapeManager){
+        for (n, color) in colors.enumerated() {
+            let shape = make(shape: .square(.medium), color: color)
+            
+            let blockSize = Size.medium.rawValue
+            let margin = 20
+            
+            let xPosition = blockSize + (n * blockSize) + ( n * margin)
+            let yPosition = -blockSize
+            let position = CGPoint(x: xPosition, y: yPosition)
+            
+            shape.position?.setPosition(position)
+            
+            manager.insert(shape)
+        }
     }
 }
