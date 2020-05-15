@@ -1,17 +1,21 @@
 import GameplayKit
 
 class ToolboxShape: Shape {
+    var handler: () -> () = {} {
+        didSet {
+            component(ofType: TapGestureComponent.self)?.handler = handler
+        }
+    }
     
-    override init(points: [CGPoint], color: UIColor) {
+    init(points: [CGPoint], color: UIColor, parent: SKNode) {
         super.init(points: points, color: color)
         
         let tapGesture = TapGestureComponent()
         tapGesture.handler = handler
         addComponent(tapGesture)
-    }
-    
-    func handler() {
-        print("TAPPED")
+        
+        let render = RenderComponent(node: node, parent: parent)
+        addComponent(render)
     }
     
     required init?(coder: NSCoder) {

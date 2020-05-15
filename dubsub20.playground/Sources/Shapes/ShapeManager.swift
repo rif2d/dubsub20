@@ -10,9 +10,17 @@ class ShapeManager {
     
     func insert(_ shape: Shape){
         shapes.insert(shape)
+        
+        if let renderable = shape.component(ofType: RenderComponent.self) {
+            renderable.render()
+        }
     }
     
     func remove(_ shape: Shape){
         shapes.remove(shape)
+        
+        if let renderable = shape.component(ofType: RenderComponent.self) {
+            renderable.unrender()
+        }
     }
 }
