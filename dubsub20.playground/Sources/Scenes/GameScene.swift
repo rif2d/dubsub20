@@ -1,9 +1,10 @@
 import SpriteKit
 
 public class GameScene: SKScene {
-    var shapeManager: ShapeManager!
+    var entityManager: EntityManager!
     var toolbox: SKSpriteNode!
     var canvas: SKSpriteNode!
+    var sidebar: SKSpriteNode!
     
     var pannedComponent: PanGestureComponent?
     var rotatedComponent: RotationGestureComponent?
@@ -12,20 +13,24 @@ public class GameScene: SKScene {
     func setNode(){
         toolbox = childNode(withName: "//toolbox") as? SKSpriteNode
         canvas = childNode(withName: "//canvas") as? SKSpriteNode
+        sidebar = childNode(withName: "//sidebar") as? SKSpriteNode
     }
     
-    func setToolbox(){
+    func setPlayground(){
         let toolboxFactory = ToolboxShapeFactory(scene: self)
         toolboxFactory.generate(size: 50)
+        
+        let sidebarFactory = SidebarSpriteFactory(scene: self)
+        sidebarFactory.generate()
     }
     
     override public func sceneDidLoad() {
-        shapeManager = ShapeManager(scene: self)
+        entityManager = EntityManager(scene: self)
     }
     
     override public func didMove(to view: SKView) {
         setGesture()
         setNode()
-        setToolbox()
+        setPlayground()
     }
 }

@@ -21,7 +21,7 @@ class ToolboxShapeFactory {
             
             canvasShape.position?.setPosition(position)
             
-            self.scene.shapeManager.insert(canvasShape)
+            self.scene.entityManager.insert(canvasShape)
         }
         
         return toolboxShape
@@ -39,7 +39,7 @@ class ToolboxShapeFactory {
             
             shape.position?.setPosition(position)
             
-            scene.shapeManager.insert(shape)
+            scene.entityManager.insert(shape)
         }
         
         for (n, color) in colors.enumerated() {
@@ -51,7 +51,7 @@ class ToolboxShapeFactory {
             
             shape.position?.setPosition(position)
             
-            scene.shapeManager.insert(shape)
+            scene.entityManager.insert(shape)
         }
     }
 }
