@@ -1,16 +1,11 @@
 import PlaygroundSupport
-import SpriteKit
+import UIKit
 
-let sceneView = SKView(frame: CGRect(
-    x:0,
-    y:0,
-    width: 720,
-    height: 540
-))
+let gameVC = GameViewController()
 
-if let scene = GameScene(fileNamed: "GameScene") {
-    scene.scaleMode = .aspectFill
-    sceneView.presentScene(scene)
-}
+gameVC.preferredContentSize = CGSize(
+    width: 640,
+    height: 480
+)
 
-PlaygroundPage.current.liveView = sceneView
+PlaygroundPage.current.liveView = gameVC
