@@ -14,6 +14,7 @@ public class GameScene: SKScene {
     private var lastUpdateTime : TimeInterval = 0
     var pannedComponent: PanGestureComponent?
     var rotatedComponent: RotationGestureComponent?
+    var pinchedComponent: PinchGestureComponent?
     var gestureState: UIGestureRecognizer.State = .possible
     
     var availableTasks: Tasks {

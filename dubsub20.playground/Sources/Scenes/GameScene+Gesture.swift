@@ -6,12 +6,15 @@ extension GameScene {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         let rotation = UIRotationGestureRecognizer(target: self, action: #selector(handleRotation))
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch))
+        
         pan.maximumNumberOfTouches = 1
         
         view?.gestureRecognizers?.removeAll()
         view?.addGestureRecognizer(tap)
         view?.addGestureRecognizer(pan)
         view?.addGestureRecognizer(rotation)
+        view?.addGestureRecognizer(pinch)
     }
     
     @objc func handlePan(_ sender: UIPanGestureRecognizer){
@@ -60,6 +63,33 @@ extension GameScene {
         case .ended:
             if let _ = rotatedComponent{
                 rotatedComponent = nil
+            }
+            gestureState = .possible
+        default:
+            return
+        }
+    }
+    
+    @objc func handlePinch(_ sender: UIPinchGestureRecognizer){
+        let gestureViewLocation = sender.location(in: view)
+        let gestureSceneLocation = convertPoint(fromView: gestureViewLocation)
+        let gestureNode = atPoint(gestureSceneLocation)
+
+        if let pinchedComponent = gestureNode.entity?.component(ofType: PinchGestureComponent.self) {
+            pinchedComponent.handlePinch(sender: sender)
+        }
+        
+        switch sender.state {
+        case .began:
+            gestureState = .changed
+            if let pinchComponent = gestureNode.entity?.component(ofType: PinchGestureComponent.self) {
+                self.pinchedComponent = pinchComponent
+            }
+        case .changed:
+            pinchedComponent?.handlePinch(sender: sender)
+        case .ended:
+            if let _ = pinchedComponent {
+                pinchedComponent = nil
             }
             gestureState = .possible
         default:

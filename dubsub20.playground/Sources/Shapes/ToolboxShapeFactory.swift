@@ -13,12 +13,14 @@ class ToolboxShapeFactory {
         let toolboxShape = ToolboxShape(points: points, color: color, parent: scene.toolbox)
         
         toolboxShape.handler = {
-            let canvasShape = CanvasShape(points: points, color: color, parent: self.scene.canvas)
+            let canvasShapePoints = triangle.points(CGFloat(size * 4))
+            let canvasShape = CanvasShape(points: canvasShapePoints, color: color, parent: self.scene.canvas)
             let canvasFrame = self.scene.canvas.frame
             let positionX = CGFloat.random(in: 100...canvasFrame.width - 100)
             let positionY = CGFloat.random(in: 100...canvasFrame.height - 100)
             let position = CGPoint(x: positionX, y: -positionY)
             
+            canvasShape.node.setScale(1/4)
             canvasShape.position?.setPosition(position)
             
             self.scene.entityManager.insert(canvasShape)

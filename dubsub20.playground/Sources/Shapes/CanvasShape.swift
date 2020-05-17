@@ -12,6 +12,10 @@ class CanvasShape: Shape {
         rotationGesture.handler = rotationHandler
         addComponent(rotationGesture)
         
+        let pinchGesture = PinchGestureComponent()
+        pinchGesture.handler = pinchHandler
+        addComponent(pinchGesture)
+        
         let render = RenderComponent(node: node, parent: parent)
         addComponent(render)
     }
@@ -31,6 +35,16 @@ class CanvasShape: Shape {
         node.zRotation = -rotation
     }
     
+    func pinchHandler(gesture: UIPinchGestureRecognizer){
+        let currentScale = node.xScale
+        print(currentScale)
+        
+        if currentScale >= 0.25 && currentScale <= 1 {
+            let scale = min(max(currentScale * gesture.scale, 0.25), 1)
+            node.setScale(scale)
+        }
+    }
+    
     var panComponent: PanGestureComponent {
         guard let ref = component(ofType: PanGestureComponent.self) else {
             fatalError()
@@ -41,6 +55,14 @@ class CanvasShape: Shape {
     
     var rotationComponent: RotationGestureComponent {
         guard let ref = component(ofType: RotationGestureComponent.self) else {
+            fatalError()
+        }
+
+        return ref
+    }
+    
+    var pinchComponent: PinchGestureComponent {
+        guard let ref = component(ofType: PinchGestureComponent.self) else {
             fatalError()
         }
 
