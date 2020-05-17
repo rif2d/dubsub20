@@ -4,7 +4,7 @@ enum Triangle: CaseIterable {
     case isosceles
     case right
     
-    func points(_ size: Int) -> [CGPoint] {
+    func points(_ size: CGFloat) -> [CGPoint] {
         switch self {
         case .isosceles:
             return [

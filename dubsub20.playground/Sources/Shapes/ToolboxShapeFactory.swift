@@ -9,14 +9,14 @@ class ToolboxShapeFactory {
     }
     
     func make(triangle: Triangle, color: UIColor, size: Int) -> ToolboxShape {
-        let points = triangle.points(size)
+        let points = triangle.points(CGFloat(size))
         let toolboxShape = ToolboxShape(points: points, color: color, parent: scene.toolbox)
         
         toolboxShape.handler = {
             let canvasShape = CanvasShape(points: points, color: color, parent: self.scene.canvas)
-            
-            let positionX = CGFloat(arc4random_uniform(UInt32(self.scene.canvas.frame.width)))
-            let positionY = CGFloat(arc4random_uniform(UInt32(self.scene.canvas.frame.height)))
+            let canvasFrame = self.scene.canvas.frame
+            let positionX = CGFloat.random(in: 100...canvasFrame.width - 100)
+            let positionY = CGFloat.random(in: 0...canvasFrame.height - 100)
             let position = CGPoint(x: positionX, y: -positionY)
             
             canvasShape.position?.setPosition(position)
