@@ -4,8 +4,6 @@ public class GameScene: SKScene {
     var shapeManager: ShapeManager!
     var toolbox: SKSpriteNode!
     var canvas: SKSpriteNode!
-    var taskLabel: SKLabelNode!
-    var taskDescription: SKLabelNode!
     
     var pannedComponent: PanGestureComponent?
     var rotatedComponent: RotationGestureComponent?
@@ -14,9 +12,6 @@ public class GameScene: SKScene {
     func setNode(){
         toolbox = childNode(withName: "//toolbox") as? SKSpriteNode
         canvas = childNode(withName: "//canvas") as? SKSpriteNode
-        
-        taskLabel = childNode(withName: "//taskLabel") as? SKLabelNode
-        taskLabel = childNode(withName: "//taskDescription") as? SKLabelNode
     }
     
     func setToolbox(){
