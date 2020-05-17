@@ -1,6 +1,6 @@
 import GameplayKit
 
-class Task: GKState {
+class Task: NSObject {
     var name: String
     var detail: String
     

@@ -18,7 +18,8 @@ public class GameScene: SKScene {
     
     var availableTasks: Tasks {
         return [
-            Task(name: "Flower Company", detail: "Flower Detail")
+            Task(name: "Flower Company", detail: "Flower Detail"),
+            Task(name: "Brewery Logo", detail: "Brewery Detail"),
         ]
     }
     
@@ -39,10 +40,7 @@ public class GameScene: SKScene {
     
     override public func sceneDidLoad() {
         entityManager = EntityManager(scene: self)
-        
-        let firstTask = availableTasks.first!
-        taskManager = TaskManager(states: availableTasks)
-        taskManager.enter(type(of: firstTask))
+        taskManager = TaskManager(tasks: availableTasks)
     }
     
     override public func didMove(to view: SKView) {

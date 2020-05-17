@@ -1,11 +1,27 @@
 import GameplayKit
 
-class TaskManager: GKStateMachine {
-    var currentTask: Task? {
-        return currentState as? Task
+class TaskManager {
+    var availableTasks: Tasks
+    var currentTask: Task?
+    
+    init(tasks: Tasks) {
+        self.availableTasks = tasks
+        let _ = enter()
     }
     
-    init(states: Tasks) {
-        super.init(states: states)
+    func enter() -> Bool {
+        if availableTasks.count > 0 {
+            self.currentTask = availableTasks[0]
+            return true
+        }
+        return false
+    }
+    
+    func next() -> Bool {
+        guard let currentTask = currentTask else { return false }
+        guard let index = availableTasks.firstIndex(of: currentTask) else { return false }
+        
+        availableTasks.remove(at: index)
+        return enter()
     }
 }
