@@ -1,6 +1,9 @@
 import SpriteKit
 
+typealias Tasks = [Task]
+
 public class GameScene: SKScene {
+    var taskManager: TaskManager!
     var entityManager: EntityManager!
     var toolbox: SKSpriteNode!
     var canvas: SKSpriteNode!
@@ -24,8 +27,15 @@ public class GameScene: SKScene {
         sidebarFactory.generate()
     }
     
+    func availableTasks() -> Tasks {
+        return [
+            BreweryCompanyTask()
+        ]
+    }
+    
     override public func sceneDidLoad() {
         entityManager = EntityManager(scene: self)
+        taskManager = TaskManager(states: availableTasks())
     }
     
     override public func didMove(to view: SKView) {

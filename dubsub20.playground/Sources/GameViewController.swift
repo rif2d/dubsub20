@@ -2,19 +2,6 @@ import UIKit
 import GameplayKit
 
 public class GameViewController: UIViewController {
-    typealias Tasks = [Task]
-    var taskManager: TaskManager!
-    
-    func availableTasks() -> Tasks {
-        return [
-            BreweryCompanyTask()
-        ]
-    }
-
-    func setupTaskManager(){
-        taskManager = TaskManager(states: availableTasks())
-    }
-    
     func setupView(){
         self.view = SKView(frame: CGRect(x:0 , y:0, width: 640, height: 480))
         
@@ -34,9 +21,5 @@ public class GameViewController: UIViewController {
 
     public override func loadView() {
         setupView()
-    }
-    
-    public override func viewDidLoad() {
-        setupTaskManager()
     }
 }
