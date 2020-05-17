@@ -26,8 +26,16 @@ class SidebarSpriteFactory {
         scene.view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
     
+    func clearCanvas(){
+        let shapes = scene.entityManager.entities.filter { type(of: $0) == CanvasShape.self }
+        shapes.forEach { scene.entityManager.remove($0) }
+    }
+    
     func generate(){
         let taskSprite = make(name: "task_sprite", yPosition: -50, handler: showTask)
         scene.entityManager.insert(taskSprite)
+        
+        let trashSprite = make(name: "trash_sprite", yPosition: -150, handler: clearCanvas)
+        scene.entityManager.insert(trashSprite)
     }
 }

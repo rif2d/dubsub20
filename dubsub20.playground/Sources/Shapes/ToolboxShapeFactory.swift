@@ -16,7 +16,7 @@ class ToolboxShapeFactory {
             let canvasShape = CanvasShape(points: points, color: color, parent: self.scene.canvas)
             let canvasFrame = self.scene.canvas.frame
             let positionX = CGFloat.random(in: 100...canvasFrame.width - 100)
-            let positionY = CGFloat.random(in: 0...canvasFrame.height - 100)
+            let positionY = CGFloat.random(in: 100...canvasFrame.height - 100)
             let position = CGPoint(x: positionX, y: -positionY)
             
             canvasShape.position?.setPosition(position)

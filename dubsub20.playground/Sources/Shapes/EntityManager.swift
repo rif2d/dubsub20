@@ -1,7 +1,7 @@
 import GameplayKit
 
 class EntityManager {
-    var shapes = Set<GKEntity>()
+    var entities = Set<GKEntity>()
     var scene: GameScene
     
     init(scene: GameScene) {
@@ -9,7 +9,7 @@ class EntityManager {
     }
     
     func insert(_ shape: GKEntity){
-        shapes.insert(shape)
+        entities.insert(shape)
         
         if let renderable = shape.component(ofType: RenderComponent.self) {
             renderable.render()
@@ -17,7 +17,7 @@ class EntityManager {
     }
     
     func remove(_ shape: GKEntity){
-        shapes.remove(shape)
+        entities.remove(shape)
         
         if let renderable = shape.component(ofType: RenderComponent.self) {
             renderable.unrender()
