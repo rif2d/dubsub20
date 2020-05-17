@@ -18,8 +18,9 @@ class SidebarSpriteFactory {
     }
     
     func showTask(){
-        let taskMessage = "Task Detail Message"
-        let alert = UIAlertController(title: "Task Description", message: taskMessage, preferredStyle: .alert)
+        let title = scene.taskManager.currentTask?.name
+        let message = scene.taskManager.currentTask?.detail
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { _ in }))
         
         scene.view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
