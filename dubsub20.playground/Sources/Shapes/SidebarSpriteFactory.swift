@@ -22,7 +22,26 @@ class SidebarSpriteFactory {
         
         let title = scene.taskManager.currentTask?.name
         let message = scene.taskManager.currentTask?.detail
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        
+        let titleText = NSAttributedString(
+            string: title!,
+            attributes: [
+                NSAttributedString.Key.font : UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title1)
+            ]
+        )
+        alert.setValue(titleText, forKey: "attributedTitle")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .left
+        let messageText = NSAttributedString(
+            string: message!,
+            attributes: [
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font : UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+            ]
+        )
+        alert.setValue(messageText, forKey: "attributedMessage")
         
         alert.addAction(UIAlertAction(title: "Finish", style: .default, handler: { _ in
             let nextAvailable = self.scene.taskManager.next()

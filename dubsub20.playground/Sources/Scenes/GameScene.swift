@@ -20,8 +20,21 @@ public class GameScene: SKScene {
     
     var availableTasks: Tasks {
         return [
-            Task(name: "Flower Company", detail: "Flower Detail"),
-            Task(name: "Brewery Logo", detail: "Brewery Detail"),
+            Task(name: "Puppify", detail: """
+Puppify is a pet store that caters exclusively to dogs.
+
+From food, supplements, grooming items, feeding and quality clothes including those that are handmade and imported.
+
+Puppify ensures that your dog friends get the utmost top quality of pet supplies and care.
+"""),
+            Task(name: "COLDPINT", detail: """
+COLDPINT is the ultimate destination for who happen to be lovers of fine wine, offering a selection of wines and beers from around the world.
+
+The cocktail menu is organized by the four seasons, making the seemingly overwhelming choices a little bit easier to whittle down.
+
+The measure of a bar is the experience of its customers – in hospitality, drinks and food COLDPINT has the fundamentals down to a fine art.
+
+"""),
         ]
     }
     
