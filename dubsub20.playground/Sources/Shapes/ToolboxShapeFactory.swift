@@ -13,6 +13,8 @@ class ToolboxShapeFactory {
         let toolboxShape = ToolboxShape(points: points, color: color, parent: scene.toolbox)
         
         toolboxShape.handler = {
+            self.scene.playAudio(name: "click.wav")
+            
             let canvasShapePoints = triangle.points(CGFloat(size * 4))
             let canvasShape = CanvasShape(points: canvasShapePoints, color: color, parent: self.scene.canvas)
             let canvasFrame = self.scene.canvas.frame

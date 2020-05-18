@@ -32,7 +32,7 @@ public class GameScene: SKScene {
         label = childNode(withName: "//label") as? SKLabelNode
         bgm = childNode(withName: "//bgm") as? SKAudioNode
         
-        bgm.run(SKAction.changeVolume(to: 0.7, duration: 0))
+        bgm.run(SKAction.changeVolume(to: 0.2, duration: 0))
     }
     
     func setPlayground(){
@@ -41,6 +41,11 @@ public class GameScene: SKScene {
         
         let sidebarFactory = SidebarSpriteFactory(scene: self)
         sidebarFactory.generate()
+    }
+    
+    func playAudio(name: String){
+        let audio = SKAction.playSoundFileNamed(name, waitForCompletion: false)
+        run(audio)
     }
     
     override public func sceneDidLoad() {

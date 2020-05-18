@@ -18,6 +18,8 @@ class SidebarSpriteFactory {
     }
     
     func showTask(){
+        scene.playAudio(name: "click.wav")
+        
         let title = scene.taskManager.currentTask?.name
         let message = scene.taskManager.currentTask?.detail
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -36,6 +38,8 @@ class SidebarSpriteFactory {
     }
     
     func clearCanvas(){
+        scene.playAudio(name: "delete.wav")
+        
         let shapes = scene.entityManager.entities.filter { type(of: $0) == CanvasShape.self }
         shapes.forEach { scene.entityManager.remove($0) }
     }
