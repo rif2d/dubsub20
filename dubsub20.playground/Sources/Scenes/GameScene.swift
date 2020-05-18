@@ -10,6 +10,7 @@ public class GameScene: SKScene {
     var canvas: SKSpriteNode!
     var sidebar: SKSpriteNode!
     var label: SKLabelNode!
+    var bgm: SKAudioNode!
     
     private var lastUpdateTime : TimeInterval = 0
     var pannedComponent: PanGestureComponent?
@@ -29,6 +30,9 @@ public class GameScene: SKScene {
         canvas = childNode(withName: "//canvas") as? SKSpriteNode
         sidebar = childNode(withName: "//sidebar") as? SKSpriteNode
         label = childNode(withName: "//label") as? SKLabelNode
+        bgm = childNode(withName: "//bgm") as? SKAudioNode
+        
+        bgm.run(SKAction.changeVolume(to: 0.7, duration: 0))
     }
     
     func setPlayground(){
