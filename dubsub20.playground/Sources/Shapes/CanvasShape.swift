@@ -37,7 +37,6 @@ class CanvasShape: Shape {
     
     func pinchHandler(gesture: UIPinchGestureRecognizer){
         let currentScale = node.xScale
-        print(currentScale)
         
         if currentScale >= 0.25 && currentScale <= 1 {
             let scale = min(max(currentScale * gesture.scale, 0.25), 1)

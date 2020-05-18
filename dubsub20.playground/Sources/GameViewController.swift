@@ -10,11 +10,7 @@ public class GameViewController: UIViewController {
             
             if let view = self.view as! SKView? {
                 view.presentScene(scene)
-                
                 view.ignoresSiblingOrder = true
-                
-                view.showsFPS = true
-                view.showsNodeCount = true
             }
         }
     }
